@@ -1,0 +1,129 @@
+# Fichier de traduction en langue francaise pour le projet SkCodeOnlineTester.
+# Copyright (C) 2015 TamiaLab
+# This file is distributed under the same license as the SkCodeOnlineTester package.
+# Fabien Batteix <fabien.batteix@gmail.com>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: SkCodeOnlineTester\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-24 20:15+0100\n"
+"PO-Revision-Date: 2015-11-24 20:15+0100\n"
+"Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/home/apps.py:15
+msgid "Home pages"
+msgstr "Pages d'accueil"
+
+#: apps/home/forms.py:14
+msgid "HTML"
+msgstr "HTML"
+
+#: apps/home/forms.py:15
+msgid "Text"
+msgstr "Texte"
+
+#: apps/home/forms.py:16
+msgid "SkCode"
+msgstr "SkCode"
+
+#: apps/home/forms.py:26
+msgid "Content"
+msgstr "Texte"
+
+#: apps/home/forms.py:28
+msgid "This field accept the SkCode syntax."
+msgstr "Ce champ accepte la syntaxe SkCode."
+
+#: apps/home/forms.py:30
+msgid "Rendering mode"
+msgstr "Mode d'affichage"
+
+#: apps/home/forms.py:35
+msgid "Preview mode"
+msgstr "Mode prévisualisation"
+
+#: apps/home/forms.py:36
+msgid "In preview mode erroneous tags are displayed in a bold red font."
+msgstr "En mode prévisualisation, les balises malformées sont affichées en texte gras rouge."
+
+#: apps/home/forms.py:40
+msgid "Hard newline"
+msgstr "Retours à la ligne forcés"
+
+#: apps/home/forms.py:41
+msgid "Tick to enable hard newlines."
+msgstr "Cocher cette case pour activer les retours à la lignes forcés."
+
+#: apps/home/forms.py:46
+msgid "Allow tagname=value shortcut"
+msgstr "Accepter le raccourci nombalise=valeur"
+
+#: apps/home/forms.py:47
+msgid "Untick to fallback into a HTML-like mode."
+msgstr "Décocher cette case pour passer en mode de rétro-compatibilité HTML."
+
+#: apps/home/forms.py:51
+msgid "Allow self closing tags"
+msgstr "Accepter les balises autofermantes"
+
+#: apps/home/forms.py:52
+msgid "Untick to restrict the parser from allowing XHTML-like tags."
+msgstr "Décocher cette case pour forcer le parseur à refuser les balises typées XHTML."
+
+#: apps/home/forms.py:56
+msgid "Drop unrecognized tags"
+msgstr "Faire disparaitre les balises non reconnues"
+
+#: apps/home/forms.py:57
+msgid "Tick to drop unrecognized tags instead of making them bold red."
+msgstr "Cocher cette case pour faire disparaitre les balises non reconnes au lieu de les afficher en rouge."
+
+#: apps/home/forms.py:61
+msgid "Texturize unclosed tags"
+msgstr "Transformer en texte les balises non fermées"
+
+#: apps/home/forms.py:62
+msgid "Tick to turn unclosed tags into raw text."
+msgstr "Cocher cette case pour transformer en texte les balises non fermées."
+
+#: apps/home/forms.py:67
+msgid "Make paragraphs"
+msgstr "Générer les paragraphes"
+
+#: apps/home/forms.py:68
+msgid "Untick to disable the auto-paragraphs feature."
+msgstr "Décocher cette case pour ne pas générer de paragraphes à chaque double retour de ligne."
+
+#: apps/home/forms.py:72
+msgid "Render footnotes"
+msgstr "Afficher les notes de bas de page"
+
+#: apps/home/forms.py:73
+msgid "Untick to disable the rendering of footnotes."
+msgstr "Décocher cette case pour masquer les notes de bas de page."
+
+#: apps/home/forms.py:77
+msgid "Extract titles"
+msgstr "Générer un sommaire"
+
+#: apps/home/forms.py:78
+msgid "Untick to disable the auto-summary feature."
+msgstr "Décocher cette case pour ne pas générer de sommaire à partir des titres."
+
+#: apps/home/forms.py:82
+msgid "Auto title IDs"
+msgstr "Auto-générer les IDs des titres"
+
+#: apps/home/forms.py:83
+msgid "Untick to disable the auto-generation of title IDs."
+msgstr "Décocher cette case pour ne pas assigner automatiquement un ID aux titres n'en possédant pas."
+
+#: apps/home/views.py:161
+msgid "Home page"
+msgstr "Page d'accueil"
