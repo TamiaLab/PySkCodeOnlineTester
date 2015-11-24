@@ -143,6 +143,7 @@ def home_page(request,
                 output_keep_newlines = True
             elif rendering_mode == RENDERING_MODE_SKCODE:
                 content = render_to_skcode(document)
+                output_keep_newlines = True
             else:
                 content = 'ERROR'
 
