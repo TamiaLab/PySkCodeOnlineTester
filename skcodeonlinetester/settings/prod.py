@@ -104,7 +104,8 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
 
 # Set to true to force client browser to sent the session cookies over HTTPS
 # See https://docs.djangoproject.com/en/1.7/ref/settings/#session-cookie-secure
-SESSION_COOKIE_SECURE = True
+# FIXME Current production server does not provided HTTPS
+SESSION_COOKIE_SECURE = False
 
 #endregion
 
@@ -112,7 +113,8 @@ SESSION_COOKIE_SECURE = True
 
 # Set to true to force client browser to sent the cookies over HTTPS
 # See https://docs.djangoproject.com/en/1.7/ref/settings/#csrf-cookie-secure
-CSRF_COOKIE_SECURE = True
+# FIXME Current production server does not provided HTTPS
+CSRF_COOKIE_SECURE = False
 
 #endregion
 
