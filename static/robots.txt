@@ -1,0 +1,19 @@
+#
+# Only robots should read this file. So, what are you doing here dude!?
+#
+
+# Disallow GET-parametrized url for everyone
+User-agent: *
+Disallow: /*?*
+
+# Allow google image bot
+User-agent: Googlebot-Image
+Allow: /static/images/
+Allow: /uploads/
+
+# No Thanks.
+User-agent: ia_archiver
+Disallow: /
+
+# Sitemap (index file)
+# Sitemap: http://pyskcode.tamialab.fr/sitemap.xml

@@ -1,0 +1,22 @@
+{% extends "home/base_home.html" %}
+{% load bootstrapform %}
+
+{% block content %}
+
+    {% if output_content %}
+       <p>Résultat :</p>
+
+        {% if output_keep_newlines %}<pre>{% else %}<div class="well">{% endif %}{{ output_content|safe }}{% if output_keep_newlines %}</pre>{% else %}</div>{% endif %}
+    {% endif %}
+
+    <hr>
+
+    <form method="post" action="{% url 'home:index' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form|bootstrapform }}
+
+        <input type="submit" class="btn btn-primary center-block" value="Envoyer"/>
+    </form>
+
+{% endblock %}
