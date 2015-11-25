@@ -4,19 +4,31 @@
 {% block content %}
 
     {% if output_content %}
-       <p>Résultat :</p>
-
-        {% if output_keep_newlines %}<pre>{% else %}<div class="well">{% endif %}{{ output_content|safe }}{% if output_keep_newlines %}</pre>{% else %}</div>{% endif %}
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-title"><i class="fa fa-code"></i> Résultat</h1>
+            </div>
+            <div class="panel-body">
+                {% if output_keep_newlines %}<pre>{% else %}<div class="well">{% endif %}{{ output_content|safe }}{% if output_keep_newlines %}</pre>{% else %}</div>{% endif %}
+            </div>
+        </div>
     {% endif %}
 
     <hr>
 
-    <form method="post" action="{% url 'home:index' %}" enctype="multipart/form-data">
-        {% csrf_token %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title"><i class="fa fa-code"></i> Editeur</h1>
+        </div>
+        <div class="panel-body">
+            <form method="post" action="{% url 'home:index' %}" enctype="multipart/form-data">
+                {% csrf_token %}
 
-        {{ form|bootstrapform }}
+                {{ form|bootstrapform }}
 
-        <input type="submit" class="btn btn-primary center-block" value="Envoyer"/>
-    </form>
+                <input type="submit" class="btn btn-primary center-block" value="Envoyer"/>
+            </form>
+        </div>
+    </div>
 
 {% endblock %}
