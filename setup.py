@@ -7,7 +7,7 @@ import os
 
 from pip.req import parse_requirements
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 # Dump readme content as text
@@ -20,10 +20,10 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 # Setup config
 setup(
     name='skcodeonlinetester',
-    version='0.1',
-    packages=['skcodeonlinetester', 'apps'],
+    version='1.0.2',
+    packages=find_packages(),
     include_package_data=True,
-    license='GPLv3',
+    license='AGPLv3',
     description='Online testing Website for the PySkCode project implemented with Django framework and Python 3.4',
     long_description=README,
     url='https://github.com/TamiaLab/PySkCodeOnlineTester',
@@ -31,7 +31,7 @@ setup(
         'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+        'License :: OSI Approved :: GNU Affero General Public License v3',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3.4',
