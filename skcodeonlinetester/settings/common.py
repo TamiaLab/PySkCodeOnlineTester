@@ -13,7 +13,7 @@ import json  # For secret configuration file parsing
 
 from django.utils.translation import ugettext_lazy as _
 
-# IMPORTANT NOTE: DO NOT USE TUPPLE, USE ARRAY, otherwise dev/prod settings overload will break
+# IMPORTANT NOTE: DO NOT USE TUPLE, USE ARRAY, otherwise dev/prod settings overload will break
 
 #region ----- Root directory path setting
 
@@ -58,7 +58,7 @@ WSGI_APPLICATION = 'skcodeonlinetester.wsgi.dev.application'
 # See https://docs.djangoproject.com/en/1.7/ref/settings/#std:setting-FIXTURE_DIRS
 FIXTURE_DIRS = [
     os.path.join(BASE_DIR, 'fixtures'),
-    ]
+]
 
 # List of authentication backend
 # See https://docs.djangoproject.com/fr/1.8/ref/settings/#authentication-backends
@@ -78,10 +78,10 @@ LANGUAGE_CODE = 'fr'
 
 # A tuple of all available languages.
 # See https://docs.djangoproject.com/en/1.7/ref/settings/#languages
-LANGUAGES = (
+LANGUAGES = [
     ('fr', _('French')),
     ('en', _('English')),
-)
+]
 
 # Set to true to enable string language translation
 # See https://docs.djangoproject.com/en/1.7/ref/settings/#use-i18n
@@ -205,7 +205,7 @@ INSTALLED_APPS = [
 
     # 'apps.staticpages',
     # 'apps.tools',
-    ]
+]
 
 # List of all middleware that are enabled in this Django installation
 # See https://docs.djangoproject.com/en/1.7/ref/settings/#middleware-classes
@@ -220,7 +220,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'django.middleware.security.SecurityMiddleware ',
-    ]
+]
 
 #endregion
 
@@ -282,7 +282,7 @@ STATIC_URL = '/static/'
 # See https://docs.djangoproject.com/en/1.7/ref/settings/#staticfiles-dirs
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    ]
+]
 
 # The file storage engine to use when collecting static files with the collectstatic management command.
 # See https://docs.djangoproject.com/en/1.7/ref/settings/#std:setting-STATICFILES_STORAGE
@@ -293,7 +293,7 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    ]
+]
 
 #endregion
 
@@ -306,7 +306,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
-            ],
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'debug': False,
@@ -323,11 +323,11 @@ TEMPLATES = [
 
                 # Custom context processors
                 'skcodeonlinetester.context_processors.app_constants',
-                ],
+            ],
             'string_if_invalid': '!-%s-!',
-            },
         },
-    ]
+    },
+]
 
 #endregion
 
@@ -399,14 +399,19 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": True,
     "formatters": {
-        "simple": {"format": "[%(name)s] %(levelname)s: %(message)s"},
-        "full": {"format": "%(asctime)s [%(name)s] %(levelname)s: %(message)s", "datefmt": "%d-%m-%Y %H:%M:%S"},
+        "simple": {
+            "format": "[%(name)s] %(levelname)s: %(message)s",
         },
+        "full": {
+            "format": "%(asctime)s [%(name)s] %(levelname)s: %(message)s",
+            "datefmt": "%d-%m-%Y %H:%M:%S",
+        },
+    },
     "filters": {
         "require_debug_false": {
             "()": "django.utils.log.RequireDebugFalse",
-            },
         },
+    },
     "handlers": {
         "mail_admins": {
             "level": "ERROR",
@@ -417,15 +422,15 @@ LOGGING = {
             "level": "DEBUG",
             "class": "logging.StreamHandler",
             "formatter": "simple",
-            },
         },
+    },
     "loggers": {
         "django.request": {
             "handlers": ["mail_admins", "console"],
             "level": "DEBUG",
             "propagate": False,
-            },
-        }
+        },
+    }
 }
 
 #endregion
