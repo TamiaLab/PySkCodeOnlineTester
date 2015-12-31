@@ -21,7 +21,9 @@ from skcode.utility import (make_paragraphs,
                             render_footnotes_text,
                             extract_titles,
                             make_titles_hierarchy,
-                            make_auto_title_ids)
+                            make_auto_title_ids,
+                            setup_smileys_replacement,
+                            setup_cosmetics_replacement)
 
 
 from .forms import (TestSkCodeInputForm,
@@ -64,6 +66,16 @@ def home_page(request,
                                     newline_node_opts=newlines_opts,
                                     drop_unrecognized=form.cleaned_data['drop_unrecognized'],
                                     texturize_unclosed_tags=form.cleaned_data['texturize_unclosed_tags'])
+
+            # Handle smileys and cosmetics
+            if form.cleaned_data['replace_cosmetics']:
+                setup_cosmetics_replacement(document)
+            if form.cleaned_data['replace_smileys']:
+                from django.contrib.staticfiles.templatetags.staticfiles import static
+
+                def _base_url(filename):
+                    return static('images/smileys/' + filename)
+                setup_smileys_replacement(document, _base_url)
 
             # Get requested render mode
             rendering_mode = form.cleaned_data['rendering_mode']

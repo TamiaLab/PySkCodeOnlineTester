@@ -40,6 +40,16 @@ class TestSkCodeInputForm(forms.Form):
                                       label=_('Hard newline'),
                                       help_text=_('Tick to enable hard newlines.'))
 
+    replace_cosmetics = forms.BooleanField(required=False,
+                                           initial=True,
+                                           label=_('Replace cosmetics'),
+                                           help_text=_('Untick to disable cosmetics replacement.'))
+
+    replace_smileys = forms.BooleanField(required=False,
+                                         initial=True,
+                                         label=_('Replace smileys'),
+                                         help_text=_('Untick to disable smileys replacement.'))
+
     # Parser options
     allow_tagvalue_attr = forms.BooleanField(required=False,
                                              initial=True,
