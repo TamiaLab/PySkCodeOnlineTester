@@ -136,7 +136,9 @@ def home_page(request,
                 # Render the output
                 summary_content = ['Sommaire :']
                 if rendering_mode == RENDERING_MODE_HTML:
+                    summary_content.append('<ul>')
                     _recur_render_title_html(titles_hierarchy, summary_content)
+                    summary_content.append('</ul>')
                     summary_content.append('<hr>')
                 elif rendering_mode == RENDERING_MODE_TEXT:
                     _recur_render_title_text(titles_hierarchy, summary_content)
