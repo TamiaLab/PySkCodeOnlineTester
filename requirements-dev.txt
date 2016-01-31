@@ -1,9 +1,9 @@
-Pygments==2.0.2
+Pygments==2.1
 git+https://github.com/TamiaLab/PySkCode.git
 coverage==4.0.3
-Django==1.8.7
+Django==1.8.8
 django-debug-toolbar==1.4
-Pillow==3.0.0
+Pillow==3.1.0
 psycopg2==2.6.1
 pylibmc==1.5.0
 pytz==2015.7
