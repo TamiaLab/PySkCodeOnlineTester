@@ -34,7 +34,7 @@ msgstr "SkCode"
 
 #: apps/home/forms.py:26
 msgid "Content"
-msgstr "Texte"
+msgstr "Contenu"
 
 #: apps/home/forms.py:28
 msgid "This field accept the SkCode syntax."
