@@ -6,6 +6,8 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.cache import never_cache
 from django.utils.translation import ugettext_lazy as _
 from django.template.response import TemplateResponse
+from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.staticfiles.templatetags.staticfiles import static
 
 from skcode import (parse_skcode,
                     render_to_html,
@@ -22,8 +24,11 @@ from skcode.utility import (make_paragraphs,
                             extract_titles,
                             make_titles_hierarchy,
                             make_auto_title_ids,
+                            render_titles_hierarchy_html,
+                            render_titles_hierarchy_text,
                             setup_smileys_replacement,
-                            setup_cosmetics_replacement)
+                            setup_cosmetics_replacement,
+                            setup_relative_urls_conversion)
 
 
 from .forms import (TestSkCodeInputForm,
@@ -48,8 +53,12 @@ def home_page(request,
     """
 
     # Default value
-    output_content = ''
-    output_keep_newlines = False
+    output_content_html = ''
+    output_content_text = ''
+    summary_content_html = ''
+    summary_content_text = ''
+    footnotes_content_html = ''
+    footnotes_content_text = ''
 
     # Handle the form
     if request.method == "POST":
@@ -71,11 +80,15 @@ def home_page(request,
             if form.cleaned_data['replace_cosmetics']:
                 setup_cosmetics_replacement(document)
             if form.cleaned_data['replace_smileys']:
-                from django.contrib.staticfiles.templatetags.staticfiles import static
 
                 def _base_url(filename):
                     return static('images/smileys/' + filename)
                 setup_smileys_replacement(document, _base_url)
+
+            # Handle relative urls
+            if form.cleaned_data['convert_relative_url_to_absolute']:
+                current_site = get_current_site(request)
+                setup_relative_urls_conversion(document, 'http://%s/' % current_site.domain)
 
             # Get requested render mode
             rendering_mode = form.cleaned_data['rendering_mode']
@@ -92,14 +105,9 @@ def home_page(request,
 
                 # Render all footnotes
                 if rendering_mode == RENDERING_MODE_HTML:
-                    footnotes_content = '<hr>\n' + render_footnotes_html(footnotes)
+                    footnotes_content_html = render_footnotes_html(footnotes)
                 elif rendering_mode == RENDERING_MODE_TEXT:
-                    footnotes_content = '----------\n' + render_footnotes_text(footnotes)
-                else:
-                    footnotes_content = ''
-
-            else:
-                footnotes_content = ''
+                    footnotes_content_text = render_footnotes_text(footnotes)
 
             # Apply titles utilities (part 1 of 2)
             if form.cleaned_data['make_auto_title_ids']:
@@ -112,67 +120,35 @@ def home_page(request,
                 titles = extract_titles(document)
 
                 # Turn the titles list into a hierarchy
-                titles_hierarchy = make_titles_hierarchy(titles)
-
-                # Recursive helper for HTML rendering
-                def _recur_render_title_html(title_groups, output):
-                    for parent_title, sub_titles in title_groups:
-                        title_id, tree_node, title_level = parent_title
-                        output.append('<li>')
-                        output.append('<a href="#%s">%s</a>' % (title_id, tree_node.get_raw_content()))
-                        if sub_titles:
-                            output.append('<ul>')
-                            _recur_render_title_html(sub_titles, output)
-                            output.append('</ul>')
-                        output.append('</li>')
-
-                # Recursive helper for text rendering
-                def _recur_render_title_text(title_groups, output, indent=0):
-                    for parent_title, sub_titles in title_groups:
-                        title_id, tree_node, title_level = parent_title
-                        output.append('%s %s' % ('#' * indent, tree_node.get_raw_content()))
-                        _recur_render_title_text(sub_titles, output, indent + 1)
+                titles_hierarchy = list(make_titles_hierarchy(titles))
 
                 # Render the output
-                summary_content = ['Sommaire :']
                 if rendering_mode == RENDERING_MODE_HTML:
-                    summary_content.append('<ul>')
-                    _recur_render_title_html(titles_hierarchy, summary_content)
-                    summary_content.append('</ul>')
-                    summary_content.append('<hr>')
+                    summary_content_html = render_titles_hierarchy_html(titles_hierarchy)
                 elif rendering_mode == RENDERING_MODE_TEXT:
-                    _recur_render_title_text(titles_hierarchy, summary_content)
-
-                # Craft the output
-                summary_content.append('')
-                summary_content = '\n'.join(summary_content)
-
-            else:
-                summary_content = ''
+                    summary_content_text = render_titles_hierarchy_text(titles_hierarchy)
 
             # Render the document
             if rendering_mode == RENDERING_MODE_HTML:
-                content = render_to_html(document)
+                output_content_html = render_to_html(document)
             elif rendering_mode == RENDERING_MODE_TEXT:
-                content = render_to_text(document)
-                output_keep_newlines = True
+                output_content_text = render_to_text(document)
             elif rendering_mode == RENDERING_MODE_SKCODE:
-                content = render_to_skcode(document)
-                output_keep_newlines = True
+                output_content_text = render_to_skcode(document)
             else:
-                content = 'ERROR'
-
-            # Craft the final HTML
-            output_content = '%s\n%s\n%s' % (summary_content, content, footnotes_content)
-
+                output_content_text = 'ERROR'
     else:
         form = test_input_form()
 
     # Render the template
     context = {
         'form': form,
-        'output_content': output_content,
-        'output_keep_newlines': output_keep_newlines,
+        'output_content_html': output_content_html,
+        'output_content_text': output_content_text,
+        'summary_content_html': summary_content_html,
+        'summary_content_text': summary_content_text,
+        'footnotes_content_html': footnotes_content_html,
+        'footnotes_content_text': footnotes_content_text,
         'title': _('Home page'),
     }
     if extra_context is not None:

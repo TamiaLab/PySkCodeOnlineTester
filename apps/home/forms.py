@@ -91,3 +91,8 @@ class TestSkCodeInputForm(forms.Form):
                                              initial=True,
                                              label=_('Auto title IDs'),
                                              help_text=_('Untick to disable the auto-generation of title IDs.'))
+
+    convert_relative_url_to_absolute = forms.BooleanField(required=False,
+                                             initial=True,
+                                             label=_('Convert relative URLs to absolute URLs'),
+                                             help_text=_('Untick to disable the auto-conversion of relative URLs.'))

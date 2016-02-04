@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SkCodeOnlineTester\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-31 16:31+0100\n"
-"PO-Revision-Date: 2015-12-31 16:31+0100\n"
+"POT-Creation-Date: 2016-02-04 16:54+0100\n"
+"PO-Revision-Date: 2016-02-04 16:54+0100\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -77,8 +77,7 @@ msgstr "Remplacer les smileys"
 
 #: apps/home/forms.py:51
 msgid "Untick to disable smileys replacement."
-msgstr ""
-"Décocher cette case pour ne transformer les smileys en images."
+msgstr "Décocher cette case pour ne transformer les smileys en images."
 
 #: apps/home/forms.py:56
 msgid "Allow tagname=value shortcut"
@@ -153,6 +152,15 @@ msgstr ""
 "Décocher cette case pour ne pas assigner automatiquement un ID aux titres "
 "n'en possédant pas."
 
-#: apps/home/views.py:174
+#: apps/home/forms.py:97
+msgid "Convert relative URLs to absolute URLs"
+msgstr "Convertir les URLs relatives en URLs absolues"
+
+#: apps/home/forms.py:98
+msgid "Untick to disable the auto-conversion of relative URLs."
+msgstr ""
+"Décocher cette case pour ne pas convertir les URLs relatives en URLs absolues."
+
+#: apps/home/views.py:152
 msgid "Home page"
 msgstr "Page d'accueil"

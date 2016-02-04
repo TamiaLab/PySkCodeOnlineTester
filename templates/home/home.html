@@ -7,15 +7,37 @@
     <div class="col-md-12">
 
         <!-- Output -->
-        {% if output_content %}
+        {% if output_content_html or output_content_text %}
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h1 class="panel-title"><i class="fa fa-code"></i> Résultat</h1>
                 </div>
 
                 <div class="panel-body">
-                    {% if output_keep_newlines %}<pre>{% else %}<div class="well">{% endif %}{{ output_content|safe }}{% if output_keep_newlines %}</pre>{% else %}</div>{% endif %}
-            </div>
+                    {% if output_content_text %}
+                        <pre>{% if summary_content_text %}Sommaire :
+{{ summary_content_text }}
+----------{% endif %}
+{{ output_content_text }}
+{% if footnotes_content_text %}----------
+{{ footnotes_content_text }}{% endif %}</pre>
+                    {% endif %}
+
+                    {% if output_content_html %}
+                        <div class="well">
+                            {% if summary_content_html %}
+                                <p>Sommaire :</p>
+                                {{ summary_content_html|safe }}
+                                <hr>
+                            {% endif %}
+                            {{ output_content_html|safe }}
+                            {% if footnotes_content_html %}
+                                <hr>
+                                {{ footnotes_content_html|safe }}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
             </div>
 
             <hr>
