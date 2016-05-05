@@ -2,6 +2,7 @@
 Extra context processors for the SkCodeOnlineTester app.
 """
 
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.sites.shortcuts import get_current_site
 
 
@@ -14,13 +15,15 @@ def app_constants(request):
     site = get_current_site(request)
     return {
         'APP': {
-            'TITLE': 'Console de test du projet PySkCode',
-            'TITLE_SHORT': 'PySkCode Tester',
+            'TITLE': _('Test console for the PySkCode project'),
+            'TITLE_SHORT': _('PySkCode test console'),
             'AUTHOR': 'Fabien Batteix',
             'COPYRIGHT': 'TamiaLab 2015',
-            'DESCRIPTION': 'Console de test pour le projet PySkCode.',
-            'GOOGLE_SITE_VERIFICATION_CODE': '',  # TODO
+            'DESCRIPTION': _('Test console for the PySkCode project.'),
+            'GOOGLE_SITE_VERIFICATION_CODE': '',
             'TWITTER_USERNAME': 'skywodd',
+            'TWITTER_ACCOUNT_ID': '250273994',
+            'FACEBOOK_URL': 'https://www.facebook.com/fabien.batteix',
         },
         'SITE': {
             'NAME': site.name,
