@@ -14,13 +14,15 @@ from setuptools import setup, find_packages
 with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
     README = readme.read()
 
+
 # Allow setup.py to be run from any path
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
+
 
 # Setup config
 setup(
     name='skcodeonlinetester',
-    version='1.1.0',
+    version='1.2.0',
     packages=find_packages(),
     include_package_data=True,
     license='AGPLv3',
