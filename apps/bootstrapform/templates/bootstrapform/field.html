@@ -11,7 +11,7 @@
             {% if field.auto_id %}
                 <label>
                     {{ field }}
-                    {{ field.label }}{% if field.field.required %} <sup><i class="fa fa-asterisk" title="{{ mandatory_field }}"></i></sup>{% endif %}
+                    {{ field.label }}{% if field.field.required %} <sup><i class="fa fa-asterisk" title="{{ mandatory_field }}" aria-hidden="true"></i></sup>{% endif %}
                 </label>
             {% endif %}
 
@@ -30,7 +30,7 @@
 
     {% elif field|is_radio %}
         {% if field.auto_id %}
-            <label class="control-label{% if bootstrap_type == "horizontal" %} col-sm-2{% endif %}" for="{{ field.auto_id }}">{{ field.label }}{% if field.field.required %} <sup><i class="fa fa-asterisk" title="{{ mandatory_field }}"></i></sup>{% endif %}</label>
+            <label class="control-label{% if bootstrap_type == "horizontal" %} col-sm-2{% endif %}" for="{{ field.auto_id }}">{{ field.label }}{% if field.field.required %} <sup><i class="fa fa-asterisk" title="{{ mandatory_field }}" aria-hidden="true"></i></sup>{% endif %}</label>
         {% endif %}
 
         {% if bootstrap_type == "horizontal" %}
@@ -60,7 +60,7 @@
 
     {% else %}
         {% if field.auto_id %}
-            <label class="control-label{% if bootstrap_type == "horizontal" %} col-sm-2{% endif %}" for="{{ field.auto_id }}">{{ field.label }}{% if field.field.required %} <sup><i class="fa fa-asterisk" title="{{ mandatory_field }}"></i></sup>{% endif %}</label>
+            <label class="control-label{% if bootstrap_type == "horizontal" %} col-sm-2{% endif %}" for="{{ field.auto_id }}">{{ field.label }}{% if field.field.required %} <sup><i class="fa fa-asterisk" title="{{ mandatory_field }}" aria-hidden="true"></i></sup>{% endif %}</label>
         {% endif %}
 
         <div class="{% if bootstrap_type == "horizontal" %}col-sm-10{% endif %}{% if field|is_multiple_checkbox %} multiple-checkbox{% endif %}">
