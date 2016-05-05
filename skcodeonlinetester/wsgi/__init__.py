@@ -1,3 +1,3 @@
 """
-WSGI handler for development and production enthronements.
+WSGI handler for development and production environments.
 """
