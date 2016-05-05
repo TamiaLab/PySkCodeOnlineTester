@@ -52,7 +52,7 @@ def home_page(request,
     :return: TemplateResponse
     """
 
-    # Default value
+    # Default values
     output_content_html = ''
     output_content_text = ''
     summary_content_html = ''
