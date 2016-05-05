@@ -28,7 +28,7 @@ To run locally, you can do the usual:
 9. Enjoy your local version of "SkCode Online Tester".
 
 Alternately, you can use the provided Vagrant file to deploy and run a virtual machine for the project.
-The provided Vagrant file do not install the requirements.txt, use vagrant ssh to do it manually.
+The provided Vagrant file do not install the ``requirements.txt``, use ``vagrant ssh`` to do it manually.
 If you're using the bundled provisioning script, the virtualenv is activated upon login.
 
 Remarks: Do not forget to fix the data in the ``sites`` table.
@@ -41,14 +41,16 @@ The source code of the project is released under the AGPLv3 license.
 You can do whatever the AGPLv3 license allow you to do, BUT:
 - Some vendor files in the ``/static`` directory are under various licenses. Check vendor websites for more information.
 - All templates files in the ``/templates`` and media resources (images, logo, etc) are under copyright and **NOT** under the terms of the AGPLv3 license.
-- Some templates files include legal informations from the TamiaLab organisation. You are **NOT** allowed to use them for any derived works.
+- Some templates files include legal information from the TamiaLab organisation. You are **NOT** allowed to use them for any derived works.
 
-Any derived works published under the legal terms of the TamiaLab organisation will be considered as impersonation and immediately taken down.
+Any derived works published with the legal terms of the TamiaLab organisation will be considered as impersonation and immediately taken down.
 
 ### Supported browsers
 
 Well, any recent browsers with HTML5 support should work.
 Tested in-lab with the latest version of Chrome and Firefox.
 
-The site template make heavy use of the Bootstrap 3.x framework. If your browser is supported by Boostrap, well, all features should work.
-For IE versions before 8, upgrade your browser right now, you have no excuse!
+The site template make heavy use of the [Bootstrap 3.x framework](http://getbootstrap.com/) and [Font-Awesome icon library](http://fortawesome.github.io/Font-Awesome/). 
+If your browser is supported by Boostrap, well, all features should work. JavaScript is not required in order for the website to work.
+
+For IE versions before 8, please upgrade your browser right now, you have no excuse!
