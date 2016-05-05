@@ -8,7 +8,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 
 For the full list of common settings and their values, see
-`skcodeonlinetester.settings.common.py`
+``skcodeonlinetester.settings.common.py``
 """
 
 from .common import *
@@ -16,7 +16,7 @@ from .common import *
 #region ----- Core settings
 
 # Before going on production:
-# See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
+# See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # Set to true to enable project debug mode
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -30,7 +30,7 @@ TEMPLATES[0]['OPTIONS']['debug'] = False
 # List of accepted Host header values, must be synced with the web server configuration
 # See https://docs.djangoproject.com/en/1.7/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = [
-    'pyskcode.tamialab.fr'
+    'pyskcode.tamialab.fr',
 ]
 
 #endregion
@@ -119,20 +119,10 @@ CSRF_COOKIE_SECURE = False
 
 #endregion
 
-#region ----- Login
-# See https://docs.djangoproject.com/en/1.7/topics/logging/#configuring-logging
+#region ----- Proxy settings
 
-LOGGING["handlers"]["syslog"] = {
-    "level": "DEBUG",
-    "class": "logging.handlers.SysLogHandler",
-    "address": "/dev/log",
-    "facility": "local4",
-    "formatter": "full",
-}
-LOGGING["loggers"]["django.request"]["handlers"].append("syslog")
-
-#endregion
-
-# Allow reverse proxy (nginx) to forward HTTPS over the local http connection
+# Allow local reverse proxy to forward HTTPS over the local http connection
 # See https://docs.djangoproject.com/fr/1.8/ref/settings/#secure-proxy-ssl-header
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+#endregion
