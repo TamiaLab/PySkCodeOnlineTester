@@ -1,7 +1,7 @@
 # Fichier de traduction en langue francaise pour le projet CDM.
-# Copyright (C) 2015 TamiaLab
+# Copyright (C) 2016 TamiaLab
 # This file is distributed under the same license as the CDM package.
-# Fabien Batteix <fabien.batteix@gmail.com>, 2015.
+# Fabien Batteix <fabien.batteix@gmail.com>, 2016.
 #
 msgid ""
 msgstr ""

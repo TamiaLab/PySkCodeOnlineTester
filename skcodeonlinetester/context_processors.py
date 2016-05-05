@@ -18,7 +18,7 @@ def app_constants(request):
             'TITLE': _('Test console for the PySkCode project'),
             'TITLE_SHORT': _('PySkCode test console'),
             'AUTHOR': 'Fabien Batteix',
-            'COPYRIGHT': 'TamiaLab 2015',
+            'COPYRIGHT': 'TamiaLab 2016',
             'DESCRIPTION': _('Test console for the PySkCode project.'),
             'GOOGLE_SITE_VERIFICATION_CODE': '',
             'TWITTER_USERNAME': 'skywodd',
