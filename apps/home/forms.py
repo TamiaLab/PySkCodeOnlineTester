@@ -67,7 +67,7 @@ class TestSkCodeInputForm(forms.Form):
                                            help_text=_('Tick to drop unrecognized tags instead of making them bold red.'))
 
     texturize_unclosed_tags = forms.BooleanField(required=False,
-                                                 initial=False,
+                                                 initial=True,
                                                  label=_('Texturize unclosed tags'),
                                                  help_text=_('Tick to turn unclosed tags into raw text.'))
 
