@@ -3,7 +3,6 @@ Custom template tags for the bootstrap form app.
 """
 
 from django import forms
-from django.template import Context
 from django.template.loader import get_template
 from django import template
 
@@ -34,7 +33,7 @@ def bootstrapform(element, bootstrap_type='vertical'):
             for field in element.visible_fields():
                 add_input_classes(field)
             template = get_template('bootstrapform/form.html')
-    context = Context({template_var: element, 'bootstrap_type': bootstrap_type})
+    context = {template_var: element, 'bootstrap_type': bootstrap_type}
     return template.render(context)
 
 
