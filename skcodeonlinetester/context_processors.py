@@ -15,10 +15,9 @@ def app_constants(request):
     site = get_current_site(request)
     return {
         'APP': {
-            'TITLE': _('Test console for the PySkCode project'),
-            'TITLE_SHORT': _('PySkCode test console'),
+            'TITLE': _('PySkCode test console'),
             'AUTHOR': 'Fabien Batteix',
-            'COPYRIGHT': 'TamiaLab 2016',
+            'COPYRIGHT': _('TamiaLab 2016'),
             'DESCRIPTION': _('Test console for the PySkCode project.'),
             'GOOGLE_SITE_VERIFICATION_CODE': '',
             'TWITTER_USERNAME': 'skywodd',
