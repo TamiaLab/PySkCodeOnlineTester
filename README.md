@@ -34,7 +34,7 @@ use ``vagrant ssh`` to do it manually. If you're using the bundled provisioning 
 the virtualenv is activated upon login.
 
 **Remarks:** Do not forget to fix the data in the ``sites`` table in the admin panel.
-``SITE_ID = 1`` MUST link to the domain ``www.carnetdumaker.dev``, otherwise nothing will work as excepted.
+``SITE_ID = 1`` MUST link to the domain ``pyskcode.tamialab.dev``, otherwise nothing will work as excepted.
 **The test server need to be reload after the modification of the site data.** 
 
 ### Copyright policy and derived works

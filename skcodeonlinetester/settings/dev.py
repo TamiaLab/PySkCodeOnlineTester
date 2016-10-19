@@ -115,6 +115,6 @@ class ExceptionLoggingMiddleware(object):
         import traceback
         print(traceback.format_exc())
 
-MIDDLEWARE_CLASSES.append('carnetdumaker.settings.dev.ExceptionLoggingMiddleware')
+MIDDLEWARE_CLASSES.append('skcodeonlinetester.settings.dev.ExceptionLoggingMiddleware')
 
 # endregion
