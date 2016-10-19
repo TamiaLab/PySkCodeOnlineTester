@@ -13,7 +13,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine.
-  config.vm.network "forwarded_port", guest: 80, host: 8080   # Webserver
   config.vm.network "forwarded_port", guest: 8000, host: 8000 # Django test server
 
   # VirtualBox customization
