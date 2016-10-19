@@ -1,10 +1,11 @@
 """
-Custom template tags for the bootstrap form app.
+Custom template tags for the bootstrap forms app.
 """
 
 from django import forms
-from django.template.loader import get_template
 from django import template
+from django.template.loader import get_template
+
 
 register = template.Library()
 
@@ -12,8 +13,8 @@ register = template.Library()
 @register.filter
 def bootstrapform(element, bootstrap_type='vertical'):
     """
-    Render a bootstrap form or form's field.
-    :param element: The form or form's field to be rendered.
+    Render a single form, a form set or a form field as a bootstrap form.
+    :param element: The form, formset or form field to be rendered.
     :param bootstrap_type: The type of bootstrap form. Can be "inline", "vertical" (default), or "horizontal".
     """
     element_type = element.__class__.__name__.lower()
@@ -33,7 +34,10 @@ def bootstrapform(element, bootstrap_type='vertical'):
             for field in element.visible_fields():
                 add_input_classes(field)
             template = get_template('bootstrapform/form.html')
-    context = {template_var: element, 'bootstrap_type': bootstrap_type}
+    context = {
+        template_var: element,
+        'bootstrap_type': bootstrap_type
+    }
     return template.render(context)
 
 

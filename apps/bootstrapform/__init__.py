@@ -5,4 +5,4 @@ This reusable Django application allow templates designers to display bootstrap-
 quickly, without hard-coding anything.
 """
 
-default_app_config = 'apps.bootstrapform.apps.BootstrapFormsConfig'
+default_app_config = 'apps.bootstrapform.apps.BootstrapFormsAppConfig'

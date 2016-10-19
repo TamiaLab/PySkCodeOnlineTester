@@ -6,7 +6,7 @@ from django.apps import AppConfig
 from django.utils.translation import ugettext_lazy as _
 
 
-class BootstrapFormsConfig(AppConfig):
+class BootstrapFormsAppConfig(AppConfig):
     """
     Application configuration class for the bootstrap forms app.
     """

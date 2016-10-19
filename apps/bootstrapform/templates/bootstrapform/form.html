@@ -2,7 +2,7 @@
 {{ form.media }}
 
 {% if form.non_field_errors %}
-    <div class="alert alert-danger">
+    <div class="alert alert-danger{% if bootstrap_type == "horizontal" %} col-sm-12{% endif %}">
 		<ul>
         {% for non_field_error in form.non_field_errors %}
             <li><p>{{ non_field_error }}</p></li>
@@ -19,4 +19,4 @@
     {% include 'bootstrapform/field.html' %}
 {% endfor %}
 
-<p><small><i class="fa fa-asterisk" aria-hidden="true"></i> {% blocktrans %}Mandatory fields{% endblocktrans %}</small></p>
+<p{% if bootstrap_type == "horizontal" %} class="col-sm-12"{% endif %}><small><i class="fa fa-asterisk" aria-hidden="true"></i> {% blocktrans %}Mandatory fields{% endblocktrans %}</small></p>

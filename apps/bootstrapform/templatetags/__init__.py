@@ -1,3 +1,3 @@
 """
-Template tags for the bootstrap forms app.
+Custom template tags for the bootstrap forms app.
 """
