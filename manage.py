@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+#
+# CLI command console for DEVELOPMENT.
+
 import os
 import sys
 

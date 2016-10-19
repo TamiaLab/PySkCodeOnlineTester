@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+#
+# CLI command console for PRODUCTION.
+
 import os
 import sys
 
