@@ -9,32 +9,40 @@ from django.template.response import TemplateResponse
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.staticfiles.templatetags.staticfiles import static
 
-from skcode import (parse_skcode,
-                    render_to_html,
-                    render_to_skcode,
-                    render_to_text)
-from skcode.tags import (ErroneousTextTagOptions,
-                         TextTagOptions,
-                         NewlineTagOptions,
-                         HardNewlineTagOptions)
-from skcode.utility import (make_paragraphs,
-                            extract_footnotes,
-                            render_footnotes_html,
-                            render_footnotes_text,
-                            extract_titles,
-                            make_titles_hierarchy,
-                            make_auto_title_ids,
-                            render_titles_hierarchy_html,
-                            render_titles_hierarchy_text,
-                            setup_smileys_replacement,
-                            setup_cosmetics_replacement,
-                            setup_relative_urls_conversion)
+from skcode import (
+    parse_skcode,
+    render_to_html,
+    render_to_text
+)
+from skcode.tags import (
+    TextTreeNode,
+    NewlineTreeNode,
+    HardNewlineTreeNode
+)
+from skcode.utility.paragraphs import make_paragraphs
+from skcode.utility.footnotes import (
+    extract_footnotes,
+    render_footnotes_html,
+    render_footnotes_text
+)
+from skcode.utility.titles import (
+    extract_titles,
+    make_titles_hierarchy,
+    make_auto_title_ids,
+    render_titles_hierarchy_html,
+    render_titles_hierarchy_text,
+)
+from skcode.utility.smileys import setup_smileys_replacement
+from skcode.utility.cosmetics import setup_cosmetics_replacement
+from skcode.utility.relative_urls import setup_relative_urls_conversion
+from skcode.render import DEFAULT_ERROR_HTML_TEMPLATE
 
 
-from .forms import (TestSkCodeInputForm,
-                    RENDERING_MODE_HTML,
-                    RENDERING_MODE_TEXT,
-                    RENDERING_MODE_SKCODE)
+from .forms import (
+    TestSkCodeInputForm,
+    RENDERING_MODE_HTML,
+    RENDERING_MODE_TEXT
+)
 
 
 @never_cache
@@ -66,15 +74,17 @@ def home_page(request,
         if form.is_valid():
 
             # Parse the input text
-            erroneous_text_opts = ErroneousTextTagOptions() if form.cleaned_data['preview_mode'] else TextTagOptions()
-            newlines_opts = HardNewlineTagOptions() if form.cleaned_data['hard_newline'] else NewlineTagOptions()
+            newline_node_cls = HardNewlineTreeNode if form.cleaned_data['hard_newline'] else NewlineTreeNode
             document = parse_skcode(form.cleaned_data['content'],
                                     allow_tagvalue_attr=form.cleaned_data['allow_tagvalue_attr'],
                                     allow_self_closing_tags=form.cleaned_data['allow_self_closing_tags'],
-                                    erroneous_text_node_opts=erroneous_text_opts,
-                                    newline_node_opts=newlines_opts,
-                                    drop_unrecognized=form.cleaned_data['drop_unrecognized'],
-                                    texturize_unclosed_tags=form.cleaned_data['texturize_unclosed_tags'])
+                                    mark_unclosed_tags_as_erroneous=form.cleaned_data['mark_unclosed_tags'],
+                                    newline_node_cls=newline_node_cls)
+
+            if form.cleaned_data['preview_mode']:
+                html_error_template = DEFAULT_ERROR_HTML_TEMPLATE
+            else:
+                html_error_template = '{source}'
 
             # Handle smileys and cosmetics
             if form.cleaned_data['replace_cosmetics']:
@@ -130,13 +140,11 @@ def home_page(request,
 
             # Render the document
             if rendering_mode == RENDERING_MODE_HTML:
-                output_content_html = render_to_html(document)
+                output_content_html = render_to_html(document,
+                                                     html_error_template=html_error_template)
             elif rendering_mode == RENDERING_MODE_TEXT:
                 output_content_text = render_to_text(document)
-            elif rendering_mode == RENDERING_MODE_SKCODE:
-                output_content_text = render_to_skcode(document)
-            else:
-                output_content_text = 'ERROR'
+
     else:
         form = test_input_form()
 
