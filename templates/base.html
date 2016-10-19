@@ -1,8 +1,8 @@
 {% load static from staticfiles %}<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="fr"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="fr"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang="fr"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="fr"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="fr" xmlns:og="http://ogp.me/ns#"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="fr" xmlns:og="http://ogp.me/ns#"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang="fr" xmlns:og="http://ogp.me/ns#"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="fr" xmlns:og="http://ogp.me/ns#"> <!--<![endif]-->
 <head>
 
     <!-- HTML meta -->
@@ -21,11 +21,24 @@
     <meta name="google-site-verification" content="{{ APP.GOOGLE_SITE_VERIFICATION_CODE }}" />
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" href="{% static "images/apple-touch-icon.png" %}">
-    <link rel="icon" sizes="192x192" href="{% static "images/icon-touch.png" %}">
-    <link rel="shortcut icon" href="{% static "favicon.ico" %}">
-    <meta name="msapplication-TileColor" content="#113228">
-    <meta name="msapplication-TileImage" content="{% static "images/tile.png" %}">
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static "images/apple-touch-icon-57x57.png" %}">
+	<link rel="apple-touch-icon" sizes="60x60" href="{% static "images/apple-touch-icon-60x60.png" %}">
+	<link rel="apple-touch-icon" sizes="72x72" href="{% static "images/apple-touch-icon-72x72.png" %}">
+	<link rel="apple-touch-icon" sizes="76x76" href="{% static "images/apple-touch-icon-76x76.png" %}">
+	<link rel="apple-touch-icon" sizes="114x114" href="{% static "images/apple-touch-icon-114x114.png" %}">
+	<link rel="apple-touch-icon" sizes="120x120" href="{% static "images/apple-touch-icon-120x120.png" %}">
+	<link rel="apple-touch-icon" sizes="144x144" href="{% static "images/apple-touch-icon-144x144.png" %}">
+	<link rel="apple-touch-icon" sizes="152x152" href="{% static "images/apple-touch-icon-152x152.png" %}">
+	<link rel="apple-touch-icon" sizes="180x180" href="{% static "images/apple-touch-icon-180x180.png" %}">
+	<link rel="icon" type="image/png" href="{% static "images/favicon-32x32.png" %}" sizes="32x32">
+	<link rel="icon" type="image/png" href="{% static "images/android-chrome-192x192.png" %}" sizes="192x192">
+	<link rel="icon" type="image/png" href="{% static "images/favicon-96x96.png" %}" sizes="96x96">
+	<link rel="icon" type="image/png" href="{% static "images/favicon-16x16.png" %}" sizes="16x16">
+	<link rel="manifest" href="{% static "manifest.json" %}">
+	<link rel="mask-icon" href="{% static "safari-pinned-tab.svg" %}" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#4582ec">
+	<meta name="msapplication-TileImage" content="{% static "images/mstile-144x144.png" %}">
+	<meta name="theme-color" content="#ffffff">
 
     <!-- RSS link -->
     {% block feeds %}{% endblock %}
@@ -35,9 +48,9 @@
         <meta property="og:type" content="{% block opengraph_type %}website{% endblock %}">
         <meta property="og:title" content="{% block opengraph_title %}{{ APP.TITLE }}{% endblock %}">
         <meta property="og:description" content="{% block opengraph_description %}{{ APP.DESCRIPTION }}{% endblock %}" />
-        <meta property="og:image" content="{% block opengraph_image %}{% static "images/tile.png" %}{% endblock %}">
-        <meta property="og:url" content="{% block opengraph_url %}{{ SITE.PROTO }}://{{ SITE.DOMAIN }}/{% endblock %}">
-        <meta property="og:site_name" content="{{ APP.SHORT_TITLE }}">
+        <meta property="og:image" content="{% block opengraph_image %}{% static "images/mstile-144x144.png" %}{% endblock %}">
+        <meta property="og:url" content="{% block opengraph_url %}{{ SITE.PROTO }}://{{ SITE.DOMAIN }}{% endblock %}">
+        <meta property="og:site_name" content="{{ APP.TITLE }}">
         <meta property="og:locale" content="fr_FR" />
         <meta name="twitter:card" content="{% block twitter_card %}summary{% endblock %}">
         <meta name="twitter:site" content="@{{ APP.TWITTER_USERNAME }}">
@@ -64,9 +77,9 @@
     {% endif %}
     <style>
         body {
-            padding-top: 80px;
+            padding-top: 120px;
             padding-bottom: 20px;
-            background-color: lightgray;
+            background-image: url("{% static "images/px_by_Gre3g.png" %}");
         }
 
         .page-content {
@@ -81,16 +94,9 @@
         :target:before {
             content: "";
             display: block;
-            height: 100px; /* fixed header height*/
-            margin-top: -100px; /* negative fixed header height */
+            height: 140px; /* fixed header height*/
+            margin-top: -140px; /* negative fixed header height */
             visibility: hidden;
-        }
-
-        .navbar-brand img {
-            height: 100%;
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 5px;
         }
     </style>
     <link rel="stylesheet" href="{% static "css/main.css" %}">
@@ -104,15 +110,22 @@
 
     <!-- JQuery -->
     {% if debug %}
-        <script src="{% static "js/vendor/jquery-1.12.3.js" %}"></script>
+        <script src="{% static "js/vendor/jquery.js" %}"></script>
     {% else %}
-        <script src="{% static "js/vendor/jquery-1.12.3.min.js" %}"></script>
+        <script src="{% static "js/vendor/jquery.min.js" %}"></script>
+    {% endif %}
+	
+	<!-- Debug mode warning -->
+	{% if debug %}
+        <link rel="stylesheet" href="{% static "css/ribbon.css" %}">
+		<div class="corner-ribbon bottom-left sticky red shadow"><i class="fa fa-bug" aria-hidden="true"></i> DEBUG</div>
     {% endif %}
 </head>
 
 <body>
     <!--[if lt IE 8]>
-        <p class="browserupgrade">Vous utilisez un navigateur web <strong>obsolète</strong>. Merci <a href="http://browsehappy.com/">de le mettre à jour</a> pour améliorer votre expérience sur ce site.</p>
+        <p class="browserupgrade">Vous utilisez un navigateur web <strong>obsolète</strong>.
+        Merci <a href="http://browsehappy.com/">de le mettre à jour</a> pour améliorer votre expérience sur ce site.</p>
     <![endif]-->
 
     <!-- Navigation -->
@@ -128,8 +141,10 @@
                 </button>
                 <a class="navbar-brand" href="{% url 'home:index' %}"><img alt="Brand" src="{% static "images/logo_pyskcode.png" %}"> Console de test - PySkCode</a>
             </div>
+
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="header-navbar-collapse-1">
+
                 <!-- Left navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="https://github.com/TamiaLab/PySkCode"><i class="fa fa-github" aria-hidden="true"></i> GitHub PySkCode</a></li>
@@ -138,7 +153,6 @@
             </div>
         </div>
     </nav>
-    {% block extra_navbar %}{% endblock %}
 
     <!-- Page content -->
     <div class="container container-narrow page-content">
@@ -183,7 +197,7 @@
 
         <!-- Content -->
         <div class="row">
-            {% block body %}{% endblock %}
+            {% block content %}{% endblock %}
         </div>
 
         <!-- Extra after content -->
@@ -192,14 +206,16 @@
         </div>
 
         <!-- Back to top button -->
-        <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Revenir en haut de page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
+        <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button"
+           title="Revenir en haut de page" data-toggle="tooltip" data-placement="left">
+            <span class="fa fa-chevron-up"></span></a>
     </div>
 
-    <!-- Footer -->
+    <!-- Page footer -->
     <div class="container container-narrow page-footer">
 
         <!-- Footer links -->
-        <hr style="margin-top: 0">
+        <hr>
         <footer>
             <div class="row center-block">
                 <p class="text-center">&copy; <a href="http://tamialab.fr">TamiaLab</a> 2016</p>
