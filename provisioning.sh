@@ -1,4 +1,6 @@
 #!/bin/bash
+# SkCodeOnlineTester project provision script for Vagrant (Ubuntu box)
+# By Fabien Batteix
 
 # The Postgresql version to install
 PGSQL_VERSION=9.3
