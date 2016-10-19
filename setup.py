@@ -22,7 +22,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 # Setup config
 setup(
     name='skcodeonlinetester',
-    version='1.2.0',
+    version='1.3.0',
     packages=find_packages(),
     include_package_data=True,
     license='AGPLv3',
