@@ -13,7 +13,10 @@ For the full list of common settings and their values, see
 
 from .common import *
 
-#region ----- Core settings
+# Detect test mode
+TESTING = True
+
+# region ----- Core settings
 
 # Set to true to enable project debug mode
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -42,9 +45,9 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.CryptPasswordHasher',
 ]
 
-#endregion
+# endregion
 
-#region ----- Cache settings
+# region ----- Cache settings
 
 # Cache backend options
 # See https://docs.djangoproject.com/en/1.9/ref/settings/#caches
@@ -56,9 +59,9 @@ CACHES = {
     }
 }
 
-#endregion
+# endregion
 
-#region ----- Email settings
+# region ----- Email settings
 
 # Email backend for sending email
 # See https://docs.djangoproject.com/en/1.9/ref/settings/#std:setting-EMAIL_BACKEND
@@ -70,25 +73,25 @@ ADMINS = [
 ]
 MANAGERS = ADMINS
 
-#endregion
+# endregion
 
-#region ----- Sessions settings
+# region ----- Sessions settings
 
 # Set to true to force client browser to sent the session cookies over HTTPS
 # See https://docs.djangoproject.com/en/1.9/ref/settings/#session-cookie-secure
 SESSION_COOKIE_SECURE = False
 
-#endregion
+# endregion
 
-#region ----- CSRF settings
+# region ----- CSRF settings
 
 # Set to true to force client browser to sent the cookies over HTTPS
 # See https://docs.djangoproject.com/en/1.9/ref/settings/#csrf-cookie-secure
 CSRF_COOKIE_SECURE = False
 
-#endregion
+# endregion
 
-#region ----- Debug toolbar
+# region ----- Debug toolbar
 
 # Load django-debug-toolbar in debug mode
 if DEBUG:
@@ -99,4 +102,19 @@ if DEBUG:
         MIDDLEWARE_CLASSES.index('django.middleware.common.CommonMiddleware') + 1,
         'debug_toolbar.middleware.DebugToolbarMiddleware')
 
-#endregion
+# endregion
+
+# region ----- Debug blind exception
+
+
+class ExceptionLoggingMiddleware(object):
+    """ Exception logging middleware """
+
+    def process_exception(self, request, exception):
+        """ Print the exception traceback in the console """
+        import traceback
+        print(traceback.format_exc())
+
+MIDDLEWARE_CLASSES.append('carnetdumaker.settings.dev.ExceptionLoggingMiddleware')
+
+# endregion

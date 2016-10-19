@@ -10,19 +10,23 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os    # For filesystem PATH generation and traversing
 import json  # For secret configuration file parsing
+import warnings
 
 from django.utils.translation import ugettext_lazy as _
 
+# Detect test mode
+TESTING = False
+
 # IMPORTANT NOTE: DO NOT USE TUPLE, USE LIST, otherwise dev/prod settings overload will break
 
-#region ----- Root directory path setting
+# region ----- Root directory path setting
 
 # Root directory of the project
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
-#endregion
+# endregion
 
-#region ----- Secret settings loading from JSON file
+# region ----- Secret settings loading from JSON file
 
 # Catch error to provide fallback in case of debug environment (no secret file)
 try:
@@ -31,18 +35,31 @@ try:
     with open(os.path.join(os.path.dirname(BASE_DIR), 'skcodeonlinetester-secrets.json')) as fi_handle:
         SECRETS = json.load(fi_handle)
 
-    # Override custom settings if requested
-    for key, value in SECRETS.get('OVERRIDE_SETTINGS', {}).items():
-        globals()[key] = value
-
 except IOError:
 
-    # Fallback for debug environment (no secret file)
-    SECRETS = {}
+    # No secret file, try to load the testing environment file
+    try:
 
-#endregion
+        # Open the secret settings JSON file and load it's content
+        with open(os.path.join(BASE_DIR, 'testing-secrets.json')) as fi_handle:
+            SECRETS = json.load(fi_handle)
+        warnings.warn("Secrets values loaded from the testing environment file")
 
-#region ----- Core settings
+    except IOError:
+
+        # Fallback for debug environment (no secrets file or testing file)
+        SECRETS = {}
+        warnings.warn("No secrets file available, fallback to default values")
+
+# Load custom override for default values
+this_module = globals()
+for key, value in SECRETS.items():
+    this_module[key] = value
+
+
+# endregion
+
+# region ----- Core settings
 
 # Secret key for cryptographic signing
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -73,9 +90,9 @@ APPEND_SLASH = True
 # See https://docs.djangoproject.com/en/1.9/ref/settings/#prepend-www
 PREPEND_WWW = False
 
-#endregion
+# endregion
 
-#region ----- Internationalization and localization settings
+# region ----- Internationalization and localization settings
 # See https://docs.djangoproject.com/en/1.9/topics/i18n/
 
 # Default language code of the project
@@ -114,9 +131,9 @@ USE_TZ = True
 # See https://docs.djangoproject.com/en/1.9/ref/settings/#first-day-of-week
 FIRST_DAY_OF_WEEK = 1
 
-#endregion
+# endregion
 
-#region ----- Email and error notification settings
+# region ----- Email and error notification settings
 
 # List of admin mails, will get mailed when DEBUG=False and something goes terribly wrong
 # See https://docs.djangoproject.com/en/1.9/ref/settings/#admins
@@ -131,9 +148,9 @@ MANAGERS = SECRETS.get('MANAGERS', [])
 # See https://docs.djangoproject.com/en/1.9/ref/settings/#ignorable-404-urls
 IGNORABLE_404_URLS = []
 
-#endregion
+# endregion
 
-#region ----- Cache settings
+# region ----- Cache settings
 
 # Key prefix for all cache key
 # Declared here once, then use in concrete settings
@@ -152,9 +169,9 @@ CACHE_MIDDLEWARE_KEY_PREFIX = 'cachemdw'
 # See https://docs.djangoproject.com/en/1.9/ref/settings/#std:setting-CACHE_MIDDLEWARE_SECONDS
 CACHE_MIDDLEWARE_SECONDS = 60 * 60 * 24  # 24 hours
 
-#endregion
+# endregion
 
-#region ----- Email settings
+# region ----- Email settings
 
 # Subject prefix of emails sent to ADMINS and MANAGERS
 # See https://docs.djangoproject.com/en/1.9/ref/settings/#email-subject-prefix
@@ -177,21 +194,17 @@ EMAIL_HOST_USER = SECRETS.get('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = SECRETS.get('EMAIL_HOST_PASSWORD', '')
 EMAIL_USE_TLS = SECRETS.get('EMAIL_USE_TLS', False)
 
-#endregion
+# endregion
 
-#region ----- User agents filtering settings
+# region ----- User agents filtering settings
 
 # List of (compiled) regex representing User-Agent strings that are not allowed to visit any page
 # See https://docs.djangoproject.com/en/1.9/ref/settings/#disallowed-user-agents
 DISALLOWED_USER_AGENTS = []
 
-# Some good regex here:
-# http://www.askapache.com/htaccess/blocking-bad-bots-and-scrapers-with-htaccess.html
-# https://github.com/bluedragonz/bad-bot-blocker/blob/master/.htaccess
+# endregion
 
-#endregion
-
-#region ----- Application definition
+# region ----- Application definition
 
 # List of all applications that are enabled in this Django installation
 # See https://docs.djangoproject.com/en/1.9/ref/settings/#installed-apps
@@ -226,9 +239,9 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-#endregion
+# endregion
 
-#region ----- Database settings
+# region ----- Database settings
 
 # Database settings
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
@@ -238,13 +251,13 @@ DATABASES = {
         'NAME': SECRETS.get('DATABASE_NAME', 'vagrant'),
         'USER': SECRETS.get('DATABASE_USER', 'vagrant'),
         'PASSWORD': SECRETS.get('DATABASE_PASSWORD', 'vagrant'),
-        'HOST': SECRETS.get('DATABASE_HOST', '') # If blank: use UNIX domain socket (local lines in pg_hba.conf)
+        'HOST': SECRETS.get('DATABASE_HOST', '')  # If blank: use UNIX domain socket (local lines in pg_hba.conf)
     }
 }
 
-#endregion
+# endregion
 
-#region ----- Media and files upload settings
+# region ----- Media and files upload settings
 
 # Maximum size in bytes of a request before it will be streamed to the file system instead of memory.
 # See https://docs.djangoproject.com/en/1.9/ref/settings/#file-upload-max-memory-size
@@ -269,9 +282,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 # See https://docs.djangoproject.com/en/1.9/ref/settings/#media-url
 MEDIA_URL = '/uploads/'
 
-#endregion
+# endregion
 
-#region ----- Static files upload settings
+# region ----- Static files upload settings
 # See https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 # The absolute path to the directory where collectstatic will collect static files for deployment.
@@ -282,7 +295,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # See https://docs.djangoproject.com/en/1.9/ref/settings/#static-url
 STATIC_URL = '/static/'
 
-# This setting defines the additional locations the staticfiles app will traverse if the FileSystemFinder finder is enabled.
+# This setting defines the additional locations the staticfiles app
+# will traverse if the FileSystemFinder finder is enabled.
 # See https://docs.djangoproject.com/en/1.9/ref/settings/#staticfiles-dirs
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
@@ -299,9 +313,9 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
-#endregion
+# endregion
 
-#region ----- Template settings
+# region ----- Template settings
 
 # Template settings
 # See https://docs.djangoproject.com/en/1.8/ref/templates/upgrading/
@@ -333,22 +347,26 @@ TEMPLATES = [
     },
 ]
 
-#endregion
+# endregion
 
-#region ----- XFrame settings
+# region ----- XFrame settings
 # See https://docs.djangoproject.com/en/1.9/ref/clickjacking/
 
 # Click jacking options
 # See https://docs.djangoproject.com/en/1.9/ref/settings/#std:setting-X_FRAME_OPTIONS
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-#endregion
+# User-side XSS protection
+# See https://docs.djangoproject.com/en/1.9/ref/settings/#secure-browser-xss-filter
+SECURE_BROWSER_XSS_FILTER = True
 
-#region ----- Sessions settings
+# endregion
+
+# region ----- Sessions settings
 
 # Age of cookie, in seconds
 # See https://docs.djangoproject.com/en/1.9/ref/settings/#session-cookie-age
-SESSION_COOKIE_AGE = 60 * 60 * 24 * 7 * 4 # 4 weeks
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 7 * 4  # 4 weeks
 
 # Set to true to disallow access of session cookies by javascript
 # See https://docs.djangoproject.com/en/1.9/ref/settings/#session-cookie-httponly
@@ -358,26 +376,21 @@ SESSION_COOKIE_HTTPONLY = True
 # See https://docs.djangoproject.com/en/1.9/ref/settings/#session-engine
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
-#endregion
+# endregion
 
-#region ----- CSRF settings
+# region ----- CSRF settings
 
 # Set to true to disallow CSRF cookies access from javascript
 # See https://docs.djangoproject.com/en/1.9/ref/settings/#csrf-cookie-httponly
 CSRF_COOKIE_HTTPONLY = False
 # Don't set to true, otherwise Ajax forms will be fucked up
 
-# Dotted path to callable to be used as view when a request is rejected by the CSRF middleware.
-# See https://docs.djangoproject.com/en/1.9/ref/settings/#csrf-failure-view
-CSRF_FAILURE_VIEW = 'django.views.csrf.csrf_failure'
-# TODO Add a custom CSRF view for trolling bad guys
+# endregion
 
-#endregion
-
-#region ----- Django-site settings
+# region ----- Django-site settings
 
 # Current Django site identifier
 # See https://docs.djangoproject.com/en/1.9/ref/settings/#site-id
-SITE_ID = 1
+SITE_ID = SECRETS.get('SITE_ID', 1)
 
-#endregion
+# endregion
