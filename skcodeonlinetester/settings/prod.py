@@ -58,14 +58,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # endregion
 
-# region ----- Application definition
-
-#MIDDLEWARE_CLASSES = (['django.middleware.cache.UpdateCacheMiddleware'] +
-#                      MIDDLEWARE_CLASSES +
-#                      ['django.middleware.cache.FetchFromCacheMiddleware'])
-
-# endregion
-
 # region ----- Media and files upload settings
 
 # URL that handles the media served from MEDIA_ROOT.
