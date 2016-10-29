@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SkCodeOnlineTester\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-05 16:51+0200\n"
-"PO-Revision-Date: 2016-05-05 15:01+0100\n"
+"POT-Creation-Date: 2016-10-29 22:13+0200\n"
+"PO-Revision-Date: 2016-10-29 22:13+0200\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -17,21 +17,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: skcodeonlinetester/context_processors.py:18
-msgid "Test console for the PySkCode project"
-msgstr "Console de test pour le projet PySkCode"
-
-#: skcodeonlinetester/context_processors.py:19
 msgid "PySkCode test console"
 msgstr "Console de test PySkCode"
 
-#: skcodeonlinetester/context_processors.py:22
+#: skcodeonlinetester/context_processors.py:20
+msgid "TamiaLab 2016"
+msgstr "TamiaLab 2016"
+
+#: skcodeonlinetester/context_processors.py:21
 msgid "Test console for the PySkCode project."
 msgstr "Console de test pour le projet PySkCode."
 
-#: skcodeonlinetester/settings/common.py:92
+#: skcodeonlinetester/settings/common.py:109
 msgid "French"
 msgstr "Français"
 
-#: skcodeonlinetester/settings/common.py:93
+#: skcodeonlinetester/settings/common.py:110
 msgid "English"
 msgstr "Anglais"

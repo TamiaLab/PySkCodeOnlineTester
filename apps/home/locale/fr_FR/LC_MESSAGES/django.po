@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SkCodeOnlineTester\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-05 16:51+0200\n"
-"PO-Revision-Date: 2016-02-04 16:54+0100\n"
+"POT-Creation-Date: 2016-10-29 22:13+0200\n"
+"PO-Revision-Date: 2016-10-29 22:13+0200\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -20,148 +20,134 @@ msgstr ""
 msgid "Home pages"
 msgstr "Pages d'accueil"
 
-#: apps/home/forms.py:14
+#: apps/home/forms.py:13
 msgid "HTML"
 msgstr "HTML"
 
-#: apps/home/forms.py:15
+#: apps/home/forms.py:14
 msgid "Text"
 msgstr "Texte"
 
-#: apps/home/forms.py:16
-msgid "SkCode"
-msgstr "SkCode"
-
-#: apps/home/forms.py:26
+#: apps/home/forms.py:24
 msgid "Content"
 msgstr "Contenu"
 
-#: apps/home/forms.py:28
-msgid "This field accept the SkCode syntax."
+#: apps/home/forms.py:26
+msgid "This field accept the BBCode syntax."
 msgstr "Ce champ accepte la syntaxe SkCode."
 
-#: apps/home/forms.py:30
+#: apps/home/forms.py:28
 msgid "Rendering mode"
 msgstr "Mode d'affichage"
 
-#: apps/home/forms.py:35
+#: apps/home/forms.py:33
 msgid "Preview mode"
 msgstr "Mode prévisualisation"
 
-#: apps/home/forms.py:36
+#: apps/home/forms.py:34
 msgid "In preview mode erroneous tags are displayed in a bold red font."
 msgstr ""
 "En mode prévisualisation, les balises malformées sont affichées en texte "
 "gras rouge."
 
-#: apps/home/forms.py:40
+#: apps/home/forms.py:38
 msgid "Hard newline"
 msgstr "Retours à la ligne forcés"
 
-#: apps/home/forms.py:41
+#: apps/home/forms.py:39
 msgid "Tick to enable hard newlines."
 msgstr "Cocher cette case pour activer les retours à la lignes forcés."
 
-#: apps/home/forms.py:45
+#: apps/home/forms.py:43
 msgid "Replace cosmetics"
 msgstr "Remplacer les caractéres typographiques"
 
-#: apps/home/forms.py:46
+#: apps/home/forms.py:44
 msgid "Untick to disable cosmetics replacement."
 msgstr ""
 "Décocher cette case pour ne pas remplacer les caractéres typographiques."
 
-#: apps/home/forms.py:50
+#: apps/home/forms.py:48
 msgid "Replace smileys"
 msgstr "Remplacer les smileys"
 
-#: apps/home/forms.py:51
+#: apps/home/forms.py:49
 msgid "Untick to disable smileys replacement."
 msgstr "Décocher cette case pour ne transformer les smileys en images."
 
-#: apps/home/forms.py:56
+#: apps/home/forms.py:54
 msgid "Allow tagname=value shortcut"
 msgstr "Accepter le raccourci nombalise=valeur"
 
-#: apps/home/forms.py:57
+#: apps/home/forms.py:55
 msgid "Untick to fallback into a HTML-like mode."
 msgstr "Décocher cette case pour passer en mode de rétro-compatibilité HTML."
 
-#: apps/home/forms.py:61
+#: apps/home/forms.py:59
 msgid "Allow self closing tags"
 msgstr "Accepter les balises autofermantes"
 
-#: apps/home/forms.py:62
+#: apps/home/forms.py:60
 msgid "Untick to restrict the parser from allowing XHTML-like tags."
 msgstr ""
 "Décocher cette case pour forcer le parseur à refuser les balises typées "
 "XHTML."
 
-#: apps/home/forms.py:66
-msgid "Drop unrecognized tags"
-msgstr "Faire disparaitre les balises non reconnues"
-
-#: apps/home/forms.py:67
-msgid "Tick to drop unrecognized tags instead of making them bold red."
-msgstr ""
-"Cocher cette case pour faire disparaitre les balises non reconnes au lieu de "
-"les afficher en rouge."
-
-#: apps/home/forms.py:71
+#: apps/home/forms.py:64
 msgid "Texturize unclosed tags"
 msgstr "Transformer en texte les balises non fermées"
 
-#: apps/home/forms.py:72
+#: apps/home/forms.py:65
 msgid "Tick to turn unclosed tags into raw text."
 msgstr "Cocher cette case pour transformer en texte les balises non fermées."
 
-#: apps/home/forms.py:77
+#: apps/home/forms.py:70
 msgid "Make paragraphs"
 msgstr "Générer les paragraphes"
 
-#: apps/home/forms.py:78
+#: apps/home/forms.py:71
 msgid "Untick to disable the auto-paragraphs feature."
 msgstr ""
 "Décocher cette case pour ne pas générer de paragraphes à chaque double "
 "retour de ligne."
 
-#: apps/home/forms.py:82
+#: apps/home/forms.py:75
 msgid "Render footnotes"
 msgstr "Afficher les notes de bas de page"
 
-#: apps/home/forms.py:83
+#: apps/home/forms.py:76
 msgid "Untick to disable the rendering of footnotes."
 msgstr "Décocher cette case pour masquer les notes de bas de page."
 
-#: apps/home/forms.py:87
+#: apps/home/forms.py:80
 msgid "Extract titles"
 msgstr "Générer un sommaire"
 
-#: apps/home/forms.py:88
+#: apps/home/forms.py:81
 msgid "Untick to disable the auto-summary feature."
 msgstr ""
 "Décocher cette case pour ne pas générer de sommaire à partir des titres."
 
-#: apps/home/forms.py:92
+#: apps/home/forms.py:85
 msgid "Auto title IDs"
 msgstr "Auto-générer les IDs des titres"
 
-#: apps/home/forms.py:93
+#: apps/home/forms.py:86
 msgid "Untick to disable the auto-generation of title IDs."
 msgstr ""
 "Décocher cette case pour ne pas assigner automatiquement un ID aux titres "
 "n'en possédant pas."
 
-#: apps/home/forms.py:97
+#: apps/home/forms.py:90
 msgid "Convert relative URLs to absolute URLs"
 msgstr "Convertir les URLs relatives en URLs absolues"
 
-#: apps/home/forms.py:98
+#: apps/home/forms.py:91
 msgid "Untick to disable the auto-conversion of relative URLs."
 msgstr ""
 "Décocher cette case pour ne pas convertir les URLs relatives en URLs "
 "absolues."
 
-#: apps/home/views.py:152
+#: apps/home/views.py:161
 msgid "Home page"
 msgstr "Page d'accueil"
