@@ -35,7 +35,7 @@ from skcode.utility.titles import (
 from skcode.utility.smileys import setup_smileys_replacement
 from skcode.utility.cosmetics import setup_cosmetics_replacement
 from skcode.utility.relative_urls import setup_relative_urls_conversion
-from skcode.render import DEFAULT_ERROR_HTML_TEMPLATE
+from skcode.render import DEFAULT_ERROR_HTML_TEMPLATE, SUPPRESS_ERROR_HTML_TEMPLATE
 
 
 from .forms import (
@@ -67,6 +67,7 @@ def home_page(request,
     summary_content_text = ''
     footnotes_content_html = ''
     footnotes_content_text = ''
+    document_has_errors = False
 
     # Handle the form
     if request.method == "POST":
@@ -75,16 +76,13 @@ def home_page(request,
 
             # Parse the input text
             newline_node_cls = HardNewlineTreeNode if form.cleaned_data['hard_newline'] else NewlineTreeNode
+            html_error_template = DEFAULT_ERROR_HTML_TEMPLATE if form.cleaned_data['preview_mode'] else SUPPRESS_ERROR_HTML_TEMPLATE
             document = parse_skcode(form.cleaned_data['content'],
                                     allow_tagvalue_attr=form.cleaned_data['allow_tagvalue_attr'],
                                     allow_self_closing_tags=form.cleaned_data['allow_self_closing_tags'],
                                     mark_unclosed_tags_as_erroneous=form.cleaned_data['mark_unclosed_tags'],
                                     newline_node_cls=newline_node_cls)
-
-            if form.cleaned_data['preview_mode']:
-                html_error_template = DEFAULT_ERROR_HTML_TEMPLATE
-            else:
-                html_error_template = '{source}'
+            document_has_errors = document.has_errors()
 
             # Handle smileys and cosmetics
             if form.cleaned_data['replace_cosmetics']:
@@ -115,7 +113,8 @@ def home_page(request,
 
                 # Render all footnotes
                 if rendering_mode == RENDERING_MODE_HTML:
-                    footnotes_content_html = render_footnotes_html(footnotes)
+                    footnotes_content_html = render_footnotes_html(footnotes,
+                                                                   html_error_template=html_error_template)
                 elif rendering_mode == RENDERING_MODE_TEXT:
                     footnotes_content_text = render_footnotes_text(footnotes)
 
@@ -140,17 +139,19 @@ def home_page(request,
 
             # Render the document
             if rendering_mode == RENDERING_MODE_HTML:
-                output_content_html = render_to_html(document,
-                                                     html_error_template=html_error_template)
+                output_content_html = render_to_html(document, html_error_template=html_error_template)
             elif rendering_mode == RENDERING_MODE_TEXT:
                 output_content_text = render_to_text(document)
 
     else:
         form = test_input_form()
 
+    print(output_content_html)
+
     # Render the template
     context = {
         'form': form,
+        'document_has_errors': document_has_errors,
         'output_content_html': output_content_html,
         'output_content_text': output_content_text,
         'summary_content_html': summary_content_html,
